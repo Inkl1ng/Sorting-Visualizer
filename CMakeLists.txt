@@ -10,6 +10,7 @@ find_package(raylib CONFIG REQUIRED)
 add_executable(Sorting-Visualizer
     "src/main.c"
     "src/algorithms.c"
-    "src/elements.c")
+    "src/elements.c"
+    "src/ui.c")
 
 target_link_libraries(Sorting-Visualizer PRIVATE raylib)

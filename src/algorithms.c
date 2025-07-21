@@ -10,13 +10,13 @@ static struct {
 
 void sort(seconds delay, enum algorithm algorithm, struct elements e)
 {
-        WaitTime(delay);
-
         switch (algorithm) {
         case SELECTION:
                 step_selection_sort(e);
                 break;
         }
+
+        WaitTime(delay);
 }
 
 void reset_algorithms()
