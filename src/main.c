@@ -6,6 +6,7 @@
 
 #include "algorithms.h"
 #include "elements.h"
+#include "statistics.h"
 #include "ui.h"
 
 #define DEFAULT_NUM_ELEMENTS  10
@@ -32,6 +33,11 @@ int main(int argc, char** argv)
         elements.data = malloc(sizeof(int) * elements.size);
         reset_elements(elements);
 
+        struct sorting_statistics statistics = {
+                .steps = 0,
+                .delay = DEFAULT_DELAY_SECONDS
+        };
+
         InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Sorting Visualizer");
     
         while (!WindowShouldClose()) {
@@ -52,9 +58,10 @@ int main(int argc, char** argv)
 
                 if (sorting) {
                         sort(DEFAULT_DELAY_SECONDS, SELECTION, elements);
+                        ++statistics.steps;
                 }
 
-                draw_ui(elements, sorting);
+                draw_ui(elements, sorting, statistics);
         }
 
         CloseWindow();

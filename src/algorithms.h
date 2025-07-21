@@ -4,12 +4,11 @@
 #include <stdbool.h>
 
 #include "elements.h"
+#include "statistics.h"
 
 enum algorithm {
         SELECTION
 };
-
-typedef float seconds;
 
 void sort(seconds delay, enum algorithm algorithm, struct elements e);
 

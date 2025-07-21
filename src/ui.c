@@ -1,5 +1,7 @@
 #include "ui.h"
 
+#include <stdio.h>
+
 #include <raylib.h>
 
 #define HEADER_HEIGHT 100
@@ -48,7 +50,18 @@ static void draw_sorting_indicator(bool sorting)
         }
 }
 
-void draw_ui(struct elements e, bool sorting)
+static void display_statistics(struct sorting_statistics stats) {
+        // just guessing with a size here
+        char buf[32];
+
+        snprintf(buf, sizeof(buf), "Steps: %i", stats.steps);
+        DrawText(buf, PADDING, 0, 50, WHITE);
+
+        snprintf(buf, sizeof(buf), "Delay: %.2f seconds", stats.delay);
+        DrawText(buf, PADDING, 50, 50, WHITE);
+}
+
+void draw_ui(struct elements e, bool sorting, struct sorting_statistics stats)
 {
         BeginDrawing();
 
@@ -60,6 +73,8 @@ void draw_ui(struct elements e, bool sorting)
                         draw_sorting_indicator(sorting);
 
                 EndMode2D();
+
+                display_statistics(stats);
 
         EndDrawing();
 }

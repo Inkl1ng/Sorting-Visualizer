@@ -4,12 +4,13 @@
 #include<stdbool.h>
 
 #include "elements.h"
+#include "statistics.h"
 
 #define WINDOW_WIDTH  800
 #define WINDOW_HEIGHT 900
 
 #define PADDING 5
 
-void draw_ui(struct elements e, bool sorting);
+void draw_ui(struct elements e, bool sorting, struct sorting_statistics stats);
 
 #endif
