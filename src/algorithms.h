@@ -7,13 +7,14 @@
 #include "statistics.h"
 
 enum algorithm {
-        SELECTION
+        SELECTION,
+        INSERTION
 };
 
-void sort(seconds delay, enum algorithm algorithm, struct elements e);
+void sort(seconds delay, struct elements e);
+void step(struct elements e);
 
 void reset_algorithms(); // should be called before any sorting
-
-void step_selection_sort(struct elements e);
+void select_algorithm(enum algorithm selection);
 
 #endif

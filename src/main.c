@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -10,9 +11,7 @@
 #include "ui.h"
 
 #define DEFAULT_NUM_ELEMENTS  10
-#define DEFAULT_DELAY_SECONDS 0.75
-
-bool sorting = false;
+#define DEFAULT_DELAY_SECONDS 1
 
 int main(int argc, char** argv)
 {
@@ -27,7 +26,13 @@ int main(int argc, char** argv)
                 elements.size = DEFAULT_NUM_ELEMENTS;
         }
         else {
-                elements.size = atoi(argv[1]);
+                int num_elements = atoi(argv[1]);
+                if (num_elements == 0 || num_elements == 1) {
+                        printf("Invalid numberf of elements\n");
+                        printf("Number of elements should be > 1\n");
+                        return -1;
+                }
+                elements.size = num_elements;
         }
 
         elements.data = malloc(sizeof(int) * elements.size);
@@ -38,11 +43,16 @@ int main(int argc, char** argv)
                 .delay = DEFAULT_DELAY_SECONDS
         };
 
+        bool sorting = false;
+
+        select_algorithm(INSERTION);
+
         InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Sorting Visualizer");
     
         while (!WindowShouldClose()) {
                 if (IsKeyPressed(KEY_S) && !sorting) {
                         shuffle_elements(elements);
+                        reset_algorithms();
                 }
                 if (IsKeyPressed(KEY_R) && !sorting) {
                         reset_elements(elements);
@@ -51,15 +61,20 @@ int main(int argc, char** argv)
                         sorting = !sorting;
                 }
 
+                if (IsKeyPressed(KEY_RIGHT) && !sorting) {
+                        step(elements);
+                }
+
                 if (is_sorted(elements)) {
                         sorting = false;
                         reset_algorithms();
                 }
 
                 if (sorting) {
-                        sort(DEFAULT_DELAY_SECONDS, SELECTION, elements);
+                        sort(statistics.delay, elements);
                         ++statistics.steps;
                 }
+
 
                 draw_ui(elements, sorting, statistics);
         }
