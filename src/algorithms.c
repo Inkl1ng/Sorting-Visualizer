@@ -49,10 +49,13 @@ static void step_insertion_sort(struct elements e)
         ++insertion_state.farthest_sorted;
 }
 
-void sort(seconds delay, struct elements e)
+void sort(struct timer* t, struct elements e, struct sorting_statistics* s)
 {
-        step(e);
-        WaitTime(delay);
+        if (is_timer_done(*t)) {
+                step(e);
+                resetart_timer(t);
+                ++s->steps;
+        }
 }
 
 void step(struct elements e)

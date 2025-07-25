@@ -11,6 +11,7 @@ add_executable(Sorting-Visualizer
     "src/main.c"
     "src/algorithms.c"
     "src/elements.c"
+    "src/timer.c"
     "src/ui.c")
 
 target_link_libraries(Sorting-Visualizer PRIVATE raylib)

@@ -8,6 +8,7 @@
 #include "algorithms.h"
 #include "elements.h"
 #include "statistics.h"
+#include "timer.h"
 #include "ui.h"
 
 #define DEFAULT_NUM_ELEMENTS  10
@@ -44,6 +45,11 @@ int main(int argc, char** argv)
         };
 
         bool sorting = false;
+        
+        struct timer sorting_timer = {
+                .start_time = 0.f,
+                .duration   = DEFAULT_DELAY_SECONDS
+        };
 
         select_algorithm(INSERTION);
 
@@ -71,8 +77,7 @@ int main(int argc, char** argv)
                 }
 
                 if (sorting) {
-                        sort(statistics.delay, elements);
-                        ++statistics.steps;
+                        sort(&sorting_timer, elements, &statistics);
                 }
 
 
