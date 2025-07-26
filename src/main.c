@@ -6,6 +6,7 @@
 #include <raylib.h>
 
 #include "algorithms.h"
+#include "input.h"
 #include "elements.h"
 #include "statistics.h"
 #include "timer.h"
@@ -13,7 +14,6 @@
 
 #define DEFAULT_NUM_ELEMENTS  10
 #define DEFAULT_DELAY_SECONDS 1
-#define DELAY_INCREMENT       0.1
 
 int main(int argc, char** argv)
 {
@@ -57,43 +57,9 @@ int main(int argc, char** argv)
         SetTargetFPS(60);
     
         while (!WindowShouldClose()) {
-                if (IsKeyPressed(KEY_S) && !sorting) {
-                        shuffle_elements(elements);
-                        reset_algorithms();
-                        statistics.steps = 0;
-                }
-                if (IsKeyPressed(KEY_R) && !sorting) {
-                        reset_elements(elements);
-                }
-                if (IsKeyPressed(KEY_A)) {
-                        sorting = !sorting;
-                }
+                handle_user_input(elements, &statistics, &sorting_timer);
 
-                if (IsKeyPressed(KEY_RIGHT) && !sorting) {
-                        step(elements);
-                }
-
-                if (IsKeyPressed(KEY_UP)) {
-                        statistics.delay       += DELAY_INCREMENT;
-                        sorting_timer.duration += DELAY_INCREMENT;
-                }
-                if (IsKeyPressed(KEY_DOWN) &&
-                        statistics.delay > 2 * DELAY_INCREMENT) {
-
-                        statistics.delay       -= DELAY_INCREMENT;
-                        sorting_timer.duration -= DELAY_INCREMENT;
-                }
-
-                if (is_sorted(elements)) {
-                        sorting = false;
-                        reset_algorithms();
-                }
-
-                if (sorting) {
-                        sort(&sorting_timer, elements, &statistics);
-                }
-
-                draw_ui(elements, sorting, statistics);
+                draw_ui(elements, statistics);
         }
 
         CloseWindow();

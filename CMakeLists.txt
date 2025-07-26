@@ -11,6 +11,7 @@ add_executable(Sorting-Visualizer
     "src/main.c"
     "src/algorithms.c"
     "src/elements.c"
+    "src/input.c"
     "src/timer.c"
     "src/ui.c")
 

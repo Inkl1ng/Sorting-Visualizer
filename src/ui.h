@@ -11,6 +11,6 @@
 
 #define PADDING 5
 
-void draw_ui(struct elements e, bool sorting, struct sorting_statistics stats);
+void draw_ui(struct elements e, struct sorting_statistics stats);
 
 #endif

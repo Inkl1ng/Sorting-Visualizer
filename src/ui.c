@@ -5,6 +5,7 @@
 #include <raylib.h>
 
 #include "algorithms.h"
+#include "input.h"
 
 #define HEADER_HEIGHT 100
 
@@ -35,7 +36,7 @@ static void draw_elements(struct elements e)
         }
 }
 
-static void draw_sorting_indicator(bool sorting)
+static void draw_sorting_indicator()
 {
         Rectangle rect = {
                 .x      = 0.f,
@@ -44,7 +45,7 @@ static void draw_sorting_indicator(bool sorting)
                 .height = SORTING_WINDOW_HEIGHT
         };
         
-        if (sorting) {
+        if (is_sorting()) {
                 DrawRectangleLinesEx(rect, PADDING, GREEN);
         }
         else {
@@ -80,7 +81,7 @@ static void display_statistics(struct sorting_statistics stats) {
         DrawText(buf, PADDING, 50, 50, WHITE);
 }
 
-void draw_ui(struct elements e, bool sorting, struct sorting_statistics stats)
+void draw_ui(struct elements e, struct sorting_statistics stats)
 {
         BeginDrawing();
 
@@ -89,7 +90,7 @@ void draw_ui(struct elements e, bool sorting, struct sorting_statistics stats)
                 BeginMode2D(sorting_camera);
 
                         draw_elements(e);
-                        draw_sorting_indicator(sorting);
+                        draw_sorting_indicator();
 
                 EndMode2D();
 
