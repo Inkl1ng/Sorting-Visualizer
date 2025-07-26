@@ -76,7 +76,7 @@ static void display_statistics(struct sorting_statistics stats) {
                 algorithm_to_string());
         DrawText(buf, PADDING, 0, 50, WHITE);
 
-        snprintf(buf, sizeof(buf), "Delay: %.2f seconds", stats.delay);
+        snprintf(buf, sizeof(buf), "Delay: %.1f seconds", stats.delay);
         DrawText(buf, PADDING, 50, 50, WHITE);
 }
 
