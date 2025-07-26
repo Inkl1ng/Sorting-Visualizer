@@ -4,6 +4,8 @@
 
 #include <raylib.h>
 
+#include "algorithms.h"
+
 #define HEADER_HEIGHT 100
 
 // defines area on the window given to the sorting stuff
@@ -50,11 +52,28 @@ static void draw_sorting_indicator(bool sorting)
         }
 }
 
+static const char* algorithm_to_string()
+{
+        switch (get_selected_algorithm()) {
+        case SELECTION:
+                return "selection";
+        case INSERTION:
+                return "insertion";
+        case MERGE:
+                return "merge";
+        }
+}
+
 static void display_statistics(struct sorting_statistics stats) {
         // just guessing with a size here
-        char buf[32];
+        char buf[64];
 
-        snprintf(buf, sizeof(buf), "Steps: %i", stats.steps);
+        snprintf(
+                buf,
+                sizeof(buf),
+                "Steps: %i\tAlgorithm: %s",
+                stats.steps,
+                algorithm_to_string());
         DrawText(buf, PADDING, 0, 50, WHITE);
 
         snprintf(buf, sizeof(buf), "Delay: %.2f seconds", stats.delay);

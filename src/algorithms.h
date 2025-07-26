@@ -19,5 +19,6 @@ void step(struct elements e);
 void init_algorithms(); // should be called before any sorting
 void reset_algorithms();
 void select_algorithm(enum algorithm selection);
+enum algorithm get_selected_algorithm();
 
 #endif

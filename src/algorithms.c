@@ -247,3 +247,8 @@ void select_algorithm(enum algorithm selection)
 {
         selected_algorithm = selection;
 }
+
+enum algorithm get_selected_algorithm()
+{
+        return selected_algorithm;
+}
