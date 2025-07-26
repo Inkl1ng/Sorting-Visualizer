@@ -18,8 +18,7 @@ int main(int argc, char** argv)
 {
         srand(time(NULL));
 
-        // initial reset
-        reset_algorithms();
+        init_algorithms();
 
         struct elements elements;
 
@@ -51,9 +50,10 @@ int main(int argc, char** argv)
                 .duration   = DEFAULT_DELAY_SECONDS
         };
 
-        select_algorithm(INSERTION);
+        select_algorithm(MERGE);
 
         InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Sorting Visualizer");
+        SetTargetFPS(60);
     
         while (!WindowShouldClose()) {
                 if (IsKeyPressed(KEY_S) && !sorting) {
@@ -79,7 +79,6 @@ int main(int argc, char** argv)
                 if (sorting) {
                         sort(&sorting_timer, elements, &statistics);
                 }
-
 
                 draw_ui(elements, sorting, statistics);
         }

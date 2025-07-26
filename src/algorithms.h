@@ -9,13 +9,15 @@
 
 enum algorithm {
         SELECTION,
-        INSERTION
+        INSERTION,
+        MERGE,
 };
 
 void sort(struct timer* t, struct elements e, struct sorting_statistics* s);
 void step(struct elements e);
 
-void reset_algorithms(); // should be called before any sorting
+void init_algorithms(); // should be called before any sorting
+void reset_algorithms();
 void select_algorithm(enum algorithm selection);
 
 #endif

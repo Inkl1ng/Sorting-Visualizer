@@ -12,6 +12,5 @@ bool is_sorted(struct elements e);
 void print_elements(struct elements e);
 void reset_elements(struct elements e);
 void shuffle_elements(struct elements e);
-// void draw_elements(struct elements e);
 
 #endif
